@@ -1,4 +1,8 @@
 import _ from "lodash";
+import Tiger from "./utilities";
+
+// console.log(Nijou(5));
+console.log(Tiger.say());
 
 function component() {
   const element = document.createElement("div");
