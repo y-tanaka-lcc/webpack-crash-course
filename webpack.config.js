@@ -9,4 +9,7 @@ module.exports = {
     filename: "main.js",
     path: outputPath,
   },
+  devServer: {
+    contentBase: outputPath,
+  },
 };
