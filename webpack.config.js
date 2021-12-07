@@ -1,46 +1,52 @@
-const path = require("path");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const path = require('path');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 // このファイルが存在する絶対パスとdistとを「 / 」で連結する
-const outputPath = path.resolve(__dirname, "dist");
+const outputPath = path.resolve(__dirname, 'dist');
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: './src/index.js',
   output: {
-    filename: "main.js",
+    filename: 'main.js',
     path: outputPath,
   },
   module: {
     rules: [
       {
+        enforce: 'pre', // 一番早く実行される
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+      },
+      {
         test: /\.(sc|c)ss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
         // use: {
-        //   loader: "babel-loader",
+        //   loader: 'babel-loader',
         //   options: {
-        //     presets: ["@babel/preset-env"],
+        //     presets: ['@babel/preset-env'],
         //   },
         // },
       },
       {
         test: /\.(jpe?g|png|gif|svg|ico|)$/i,
-        loader: "url-loader",
+        loader: 'url-loader',
         options: {
           limit: 1024,
-          name: "./images/[name].[ext]",
+          name: './images/[name].[ext]',
         },
       },
       {
         test: /\.html$/,
-        loader: "html-loader",
+        loader: 'html-loader',
       },
     ],
   },
@@ -49,11 +55,11 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: "./src/index.html",
-      filename: "./index.html",
+      template: './src/index.html',
+      filename: './index.html',
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].[hash].css",
+      filename: '[name].[hash].css',
     }),
   ],
   optimization: {
@@ -69,5 +75,5 @@ module.exports = {
       new OptimizeCSSAssetsPlugin(),
     ],
   },
-  devtool: "eval-source-map",
+  devtool: 'eval-source-map',
 };
