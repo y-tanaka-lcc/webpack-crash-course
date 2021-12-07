@@ -5,4 +5,6 @@ import "./style.scss";
 
 console.log("I am printing logs.");
 
+salert("Hi, sourcemap!");
+
 ReactDOM.render(<div>Hello, React!</div>, document.getElementById("root"));
