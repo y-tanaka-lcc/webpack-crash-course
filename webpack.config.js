@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 // このファイルが存在する絶対パスとdistとを「 / 」で連結する
 const outputPath = path.resolve(__dirname, "dist");
@@ -64,6 +65,8 @@ module.exports = {
           },
         },
       }),
+      // OptimizeCSSAssetsPlugin
+      new OptimizeCSSAssetsPlugin(),
     ],
   },
 };
